@@ -27,7 +27,7 @@ serviceMaps:
 
       - jsonPath: $.Employees.*.employeeType
 
-      - jsonPath: $.Employees.*.active
+      - jsonPath: $.Employees.*.isActive
 
       - jsonPath: $.Employees.*.auditDetails.createdBy
 
@@ -265,7 +265,7 @@ serviceMaps:
 
       - jsonPath: $.Employees.*.employeeType
 
-      - jsonPath: $.Employees.*.active
+      - jsonPath: $.Employees.*.isActive
 
       - jsonPath: $.Employees.*.auditDetails.createdBy
 
@@ -469,7 +469,7 @@ serviceMaps:
 
 
 
-    - query: INSERT INTO eg_hrms_deactivationdetails(uuid, employeeid, reasonfordeactivation, effectivefrom, ordernumber, typeOfDeactivation, tenantid, createdby, createddate, lastmodifiedby, lastModifiedDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    - query: INSERT INTO eg_hrms_deactivationdetails(uuid, employeeid, reasonfordeactivation, effectivefrom, ordernumber, remarks, tenantid, createdby, createddate, lastmodifiedby, lastModifiedDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
       basePath: Employees.*.deactivationDetails.*
       jsonMaps:
@@ -483,8 +483,8 @@ serviceMaps:
       - jsonPath: $.Employees.*.deactivationDetails.*.effectiveFrom
 
       - jsonPath: $.Employees.*.deactivationDetails.*.orderNo
-
-      - jsonPath: $.Employees.*.deactivationDetails.*.typeOfDeactivation
+      
+      - jsonPath: $.Employees.*.deactivationDetails.*.remarks
 
       - jsonPath: $.Employees[*][?({id} in @.deactivationDetails[*].id)].tenantId
 
@@ -495,4 +495,33 @@ serviceMaps:
       - jsonPath: $.Employees.*.deactivationDetails.*.auditDetails.lastModifiedBy
 
       - jsonPath: $.Employees.*.deactivationDetails.*.auditDetails.lastModifiedDate
+
+
+
+    - query: INSERT INTO eg_hrms_reactivationdetails(uuid, employeeid, reasonforreactivation, effectivefrom, ordernumber, remarks, tenantid, createdby, createddate, lastmodifiedby, lastmodifieddate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+      basePath: Employees.*.reactivationDetails.*
+      jsonMaps:
+
+      - jsonPath: $.Employees.*.reactivationDetails.*.id
+
+      - jsonPath: $.Employees[*][?({id} in @.reactivationDetails[*].id)].uuid
+
+      - jsonPath: $.Employees.*.reactivationDetails.*.reasonForReactivation
+
+      - jsonPath: $.Employees.*.reactivationDetails.*.effectiveFrom
+
+      - jsonPath: $.Employees.*.reactivationDetails.*.orderNo
+      
+      - jsonPath: $.Employees.*.reactivationDetails.*.remarks
+
+      - jsonPath: $.Employees[*][?({id} in @.reactivationDetails[*].id)].tenantId
+
+      - jsonPath: $.Employees.*.reactivationDetails.*.auditDetails.createdBy
+
+      - jsonPath: $.Employees.*.reactivationDetails.*.auditDetails.createdDate
+
+      - jsonPath: $.Employees.*.reactivationDetails.*.auditDetails.lastModifiedBy
+
+      - jsonPath: $.Employees.*.reactivationDetails.*.auditDetails.lastModifiedDate
 
